@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Billing Information</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    .qr-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .payment-container {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .patient-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Patient Portal</h1>
+  <button id="patient-portal-button">Fetch Patient Billing Information</button>
+  
+  <table id="billingTable" style="display: none;">
+    <thead>
+      <tr>
+        <th>Patient Name</th>
+        <th>Prescription</th>
+        <th>Registration Number</th>
+        <th>Scan Type</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="billingTableBody">
+      <!-- Rows will be dynamically inserted here -->
+    </tbody>
+  </table>
+
+  <div class="qr-container" id="qrContainer"></div>
+  <div class="payment-container" id="paymentContainer">
+    <h3>Proceed to Payment</h3>
+    <button onclick="proceedToPayment()">Pay Now</button>
+  </div>
+
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    async function fetchBillingData() {
+      try {
+        const response = await fetch('http://localhost:8000/billing'); // Fetching from API
+        const bills = await response.json();  // Parsing JSON response
+
+        const billingTable = document.getElementById('billingTable');
+        const billingTableBody = document.getElementById('billingTableBody');
+        billingTableBody.innerHTML = '';  // Clear any existing rows
+
+        // Check if there are any bills to display
+        if (bills.length > 0) {
+          billingTable.style.display = 'table';  // Show the table if data exists
+
+          // Loop through the bills and create table rows
+          bills.forEach(bill => {
+            const row = document.createElement('tr');
+
+            // Create table cells for each field
+            const patientNameCell = document.createElement('td');
+            patientNameCell.textContent = bill.patientName;
+            row.appendChild(patientNameCell);
+
+            const prescriptionCell = document.createElement('td');
+            prescriptionCell.textContent = bill.prescription;
+            row.appendChild(prescriptionCell);
+
+            const registrationNumberCell = document.createElement('td');
+            registrationNumberCell.textContent = bill.registrationNumber;
+            row.appendChild(registrationNumberCell);
+
+            const scanTypeCell = document.createElement('td');
+            scanTypeCell.textContent = bill.scanType;
+            row.appendChild(scanTypeCell);
+
+            // Create an action button for QR code generation
+            const actionCell = document.createElement('td');
+            const actionButton = document.createElement('button');
+            actionButton.textContent = 'Generate QR Code';
+            actionButton.className = 'patient-button';
+            actionButton.onclick = () => generateQRCode(bill);  // Generate QR code for the specific bill
+            actionCell.appendChild(actionButton);
+            row.appendChild(actionCell);
+
+            // Append the row to the table body
+            billingTableBody.appendChild(row);
+          });
+        } else {
+          billingTable.style.display = 'none';  // Hide the table if no data is available
+          alert('No billing records found.');
+        }
+      } catch (error) {
+        console.error('Error fetching billing data:', error);
+      }
+    }
+
+    function generateQRCode(bill) {
+      const qrContainer = document.getElementById('qrContainer');
+      const paymentContainer = document.getElementById('paymentContainer');
+
+      // Clear previous QR code
+      qrContainer.innerHTML = '';
+
+      // Generate new QR code
+      new QRCode(qrContainer, {
+        text: `Patient: ${bill.patientName}, Prescription: ${bill.prescription}, Reg No: ${bill.registrationNumber}, Scan Type: ${bill.scanType}`,
+        width: 128,
+        height: 128
+      });
+
+      // Show payment button
+      paymentContainer.style.display = 'block';
+    }
+
+    function proceedToPayment() {
+      alert('Redirecting to payment gateway...');
+      // Replace the below URL with the actual payment gateway URL
+      window.location.href = 'https://your-payment-gateway-url.com';
+    }
+
+    // Event listener for the button click
+    document.getElementById('patient-portal-button').addEventListener('click', function() {
+      fetchBillingData();  // Call fetchBillingData when the button is clicked
+    });
+  </script>
+</body>
+</html>

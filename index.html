@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRM Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <header>
+        <h1>SRM</h1>
+        <img src="./logo.png" alt="SRM Logo" id="srm-logo">
+    </header>
+   
+    <!-- Portal Selection -->
+    <div id="portal-selection">
+        <button id="doctor-portal-button">Doctor Portal</button>
+        <button id="patient-portal-button">Patient Portal</button>
+    </div>
+
+    <!-- Doctor Portal -->
+    <div id="doctor-portal" style="display: none;">
+        <form id="billing-form">
+            <label for="patientName">Patient Name:</label>
+            <input type="text" id="patientName" name="patientName" required>
+
+            <label for="prescription">Prescription:</label>
+            <input type="text" id="prescription" name="prescription" required>
+
+            <label for="registrationNumber">Registration Number:</label>
+            <input type="text" id="registrationNumber" name="registrationNumber" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <a href="patient-portal.html">patient details</a>
+    
+
+    
+    <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>SRM</h1>
+        <img src="./logo.png" alt="Official SRM Logo" id="srm-logo">
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="#" onclick="showDropdown('scan-dropdown')">Scan</a></li>
+                <li><a href="#" onclick="showDropdown('blood-bank-dropdown')">Blood Bank</a></li>
+                <li><a href="#" onclick="showDropdown('organ-donor-dropdown')">Organ Donor</a></li>
+                <li><a href="#" onclick="showDropdown('urine-specimen-dropdown')">Urine Specimen Collection Centre</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="container">
+                <!-- Scan Dropdown -->
+                <div id="scan-dropdown" class="dropdown-content" style="display: none;">
+                    <h2>Select Scan Options</h2>
+                    <select id="scan-options" onchange="updateSelection('scan-selection', this)">
+                        <option value="">--Select Scan--</option>
+                        <option value="MRI">MRI</option>
+                        <option value="CT">CT</option>
+                        <option value="X-RAY">X-RAY</option>
+                        <option value="USG">USG</option>
+                        <option value="CAT">CAT</option>
+                        <option value="PET">PET</option>
+                        <option value="ECG">ECG</option>
+                    </select>
+                    <p id="scan-selection" aria-live="polite"></p>
+                    <button id="send-scan-btn" disabled onclick="sendSelection('scan')">Submit Scan</button>
+                </div>
+
+                <!-- Blood Bank Dropdown -->
+                <div id="blood-bank-dropdown" class="dropdown-content" style="display: none;">
+                    <h2>Select Blood Bank</h2>
+                    <select id="blood-bank-options" onchange="updateSelection('blood-bank-selection', this)">
+                        <option value="">--Select Blood Bank--</option>
+                        <option value="A+">A+</option>
+                        <option value="B+">B+</option>
+                        <option value="O+">O+</option>
+                        <option value="AB+">AB+</option>
+                    </select>
+                    <p id="blood-bank-selection" aria-live="polite"></p>
+                    <button id="send-blood-bank-btn" disabled onclick="sendSelection('blood-bank')">Submit Blood Bank</button>
+                </div>
+
+                <!-- Organ Donor Dropdown -->
+                <div id="organ-donor-dropdown" class="dropdown-content" style="display: none;">
+                    <h2>Select Organ for Donation</h2>
+                    <select id="organ-donor-options" onchange="updateSelection('organ-donor-selection', this)">
+                        <option value="">--Select Organ--</option>
+                        <option value="Kidney">Kidney</option>
+                        <option value="Liver">Liver</option>
+                        <option value="Heart">Heart</option>
+                    </select>
+                    <p id="organ-donor-selection" aria-live="polite"></p>
+                    <button id="send-organ-donor-btn" disabled onclick="sendSelection('organ-donor')">Submit Organ</button>
+                </div>
+
+                <!-- Urine Specimen Dropdown -->
+                <div id="urine-specimen-dropdown" class="dropdown-content" style="display: none;">
+                    <h2>Select Urine Specimen</h2>
+                    <select id="urine-specimen-options" onchange="updateSelection('urine-specimen-selection', this)">
+                        <option value="">--Select Specimen--</option>
+                        <option value="Morning Sample">Morning Sample</option>
+                        <option value="Random Sample">Random Sample</option>
+                    </select>
+                    <p id="urine-specimen-selection" aria-live="polite"></p>
+                    <button id="send-urine-specimen-btn" disabled onclick="sendSelection('urine-specimen')">Submit Specimen</button>
+                </div>
+
+                <!-- User Avatar -->
+                <img src="https://robohash.org/random" alt="Randomized User Avatar" id="user-avatar" width="150" height="150">
+            </div>
+        </div>
+
+        <!-- Back Button -->
+        <button type="button" onclick="goBack()">Back</button>
+    </div>
+
+    <script type="module" src="renderer.js"></script>
+</body>
+</html>

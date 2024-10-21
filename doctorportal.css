@@ -1,0 +1,167 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Wrapper for the entire portal */
+.portal-wrapper {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Header and titles */
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #444;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #4a90e2;
+}
+
+h2 {
+    font-size: 1.75rem;
+    color: #4a90e2;
+}
+
+h3 {
+    font-size: 1.25rem;
+    color: #333;
+}
+
+/* Buttons */
+button {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 10px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #4a90e2;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357abd;
+}
+
+button:disabled {
+    background-color: #c2c2c2;
+    cursor: not-allowed;
+}
+
+#send-scan-btn {
+    margin-top: 20px;
+}
+
+/* Input fields and form */
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+label {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Form section styling */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.alert-message {
+    color: red;
+    font-weight: bold;
+}
+
+/* Scan type selection */
+#scan-options {
+    margin-bottom: 20px;
+}
+
+.selected-output {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Portal selection page */
+/* #portal-selection, #doctor-portal {
+    display: none;
+}
+
+#portal-selection.show, #doctor-portal.show {
+    display: block;
+}  */
+
+/* Confirmation page */
+#confirmation-page {
+    padding: 30px;
+    text-align: center;
+}
+
+#confirmation-page p {
+    font-size: 1.25rem;
+    color: #4a90e2;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f7fa;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+footer a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .portal-wrapper {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
